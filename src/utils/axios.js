@@ -8,7 +8,7 @@ const getBaseURL = () => {
     }
     return url;
   }
-  return 'https://theblissco-backend.vercel.app';
+  return 'https://tbc-backend-nine.vercel.app';
 };
 
 const instance = axios.create({
