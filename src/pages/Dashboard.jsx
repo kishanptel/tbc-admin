@@ -749,12 +749,14 @@ export default function Dashboard() {
                                 >
                                   <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px' }}>
                                     <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
-                                      <img 
-                                        src={getAvatarUrl(item.img)} 
-                                        alt={title} 
-                                        style={{ width: '48px', height: '48px', borderRadius: '10px', objectFit: 'cover', border: '1px solid var(--border-mid)' }} 
-                                        onError={(e) => { e.target.onerror = null; e.target.src = adminLogoPic; }}
-                                      />
+                                      {!isCustom && (
+                                        <img 
+                                          src={item.img || '/logo.png'} 
+                                          alt={title} 
+                                          style={{ width: '48px', height: '48px', borderRadius: '10px', objectFit: 'cover', border: '1px solid #f5e6ec' }} 
+                                          onError={(e) => { e.target.onerror = null; e.target.src = adminLogoPic; }}
+                                        />
+                                      )}
                                       <div>
                                         <h4 style={{ margin: 0, fontSize: '0.95rem', fontWeight: 800, color: '#3d1d2b' }}>{title}</h4>
                                         <span style={{ fontSize: '0.82rem', color: '#78716c', marginTop: '2px', display: 'block' }}>
@@ -816,6 +818,7 @@ export default function Dashboard() {
                         <tr>
                           <th>Customer Details</th>
                           <th>Registered Email</th>
+                          <th>Phone Number</th>
                           <th>Registration Date</th>
                           <th style={{ textAlign: 'center' }}>Status</th>
                           <th style={{ textAlign: 'center' }}>Actions</th>
@@ -839,10 +842,14 @@ export default function Dashboard() {
                                     {user.name?.split(' ').map(n => n[0]).slice(0,2).join('').toUpperCase()}
                                   </div>
                                 )}
-                                <span className="user-name-table">{user.name}</span>
+                                <div style={{ display: 'flex', flexDirection: 'column' }}>
+                                  <span className="user-name-table">{user.name}</span>
+                                  {user.phone && <span style={{ fontSize: '0.76rem', color: 'var(--text-dim)', fontWeight: '600' }}>📞 {user.phone}</span>}
+                                </div>
                               </div>
                             </td>
                             <td data-label="Email" style={{ fontWeight: '500' }}>{user.email}</td>
+                            <td data-label="Phone Number" style={{ fontWeight: '600', color: 'var(--navy)' }}>{user.phone || '—'}</td>
                             <td data-label="Registered" style={{ color: 'var(--text-dim)' }}>
                               {new Date(user.createdAt).toLocaleDateString('en-IN', {
                                 day: '2-digit',
