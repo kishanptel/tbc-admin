@@ -28,10 +28,11 @@ export default function Login() {
     setLoading(true);
 
     try {
-      const res = await instance.post('/users/login', { email, password, isAdmin: true });
+      const cleanEmail = email.trim().toLowerCase();
+      const res = await instance.post('/users/login', { email: cleanEmail, password, isAdmin: true });
       if (res.data?.success) {
-        const userData = res.data.Data;
-        if (userData.isAdmin) {
+        const userData = res.data.Data || res.data.user;
+        if (userData && (userData.isAdmin || userData.isAdmin === 'true')) {
           if (rememberMe) {
             localStorage.setItem('theblissco_admin', JSON.stringify(userData));
           } else {
@@ -41,8 +42,11 @@ export default function Login() {
         } else {
           setError('Access denied. Administrator privileges required.');
         }
+      } else {
+        setError(res.data?.message || 'Login failed. Invalid response from server.');
       }
     } catch (err) {
+      console.error('Admin Login Error:', err);
       setError(err.response?.data?.message || 'Login failed. Please check your credentials.');
     } finally {
       setLoading(false);
