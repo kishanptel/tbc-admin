@@ -976,7 +976,7 @@ export default function Dashboard() {
                             type="text" 
                             className="form-input" 
                             style={{ paddingLeft: '16px' }}
-                            placeholder="Name"
+                            placeholder="e.g. Name"
                             value={newAdminName} 
                             onChange={(e) => setNewAdminName(e.target.value)} 
                             required 
