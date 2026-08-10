@@ -825,31 +825,30 @@ export default function Dashboard() {
                         </tr>
                       </thead>
                       <tbody>
-                        {usersList.map(user => (
-                          <tr key={user._id}>
-                            <td data-label="Customer">
-                              <div className="user-cell">
-                                {user.profile ? (
-                                  <img 
-                                    src={getAvatarUrl(user.profile)} 
-                                    alt={user.name} 
-                                    className="user-avatar-table" 
-                                    style={{ border: '2px solid var(--gold)', boxShadow: 'var(--shadow-sm)' }} 
-                                    onError={(e) => { e.target.onerror = null; e.target.src = adminLogoPic; }}
-                                  />
-                                ) : (
-                                  <div className="user-avatar-table-fallback" style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'linear-gradient(135deg, #7c2d4e, #be4b76)', color: '#ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: '800', fontSize: '0.85rem', border: '2px solid var(--gold)', boxShadow: 'var(--shadow-sm)', flexShrink: 0 }}>
-                                    {user.name?.split(' ').map(n => n[0]).slice(0,2).join('').toUpperCase()}
-                                  </div>
-                                )}
-                                <div style={{ display: 'flex', flexDirection: 'column' }}>
+                        {usersList.map(user => {
+                          const displayPhone = user.phone || ordersList.find(o => o.userEmail?.toLowerCase() === user.email?.toLowerCase())?.userPhone || '';
+                          return (
+                            <tr key={user._id}>
+                              <td data-label="Customer">
+                                <div className="user-cell">
+                                  {user.profile ? (
+                                    <img 
+                                      src={getAvatarUrl(user.profile)} 
+                                      alt={user.name} 
+                                      className="user-avatar-table" 
+                                      style={{ border: '2px solid var(--gold)', boxShadow: 'var(--shadow-sm)' }} 
+                                      onError={(e) => { e.target.onerror = null; e.target.src = adminLogoPic; }}
+                                    />
+                                  ) : (
+                                    <div className="user-avatar-table-fallback" style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'linear-gradient(135deg, #7c2d4e, #be4b76)', color: '#ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: '800', fontSize: '0.85rem', border: '2px solid var(--gold)', boxShadow: 'var(--shadow-sm)', flexShrink: 0 }}>
+                                      {user.name?.split(' ').map(n => n[0]).slice(0,2).join('').toUpperCase()}
+                                    </div>
+                                  )}
                                   <span className="user-name-table">{user.name}</span>
-                                  {user.phone && <span style={{ fontSize: '0.76rem', color: 'var(--text-dim)', fontWeight: '600' }}>📞 {user.phone}</span>}
                                 </div>
-                              </div>
-                            </td>
-                            <td data-label="Email" style={{ fontWeight: '500' }}>{user.email}</td>
-                            <td data-label="Phone Number" style={{ fontWeight: '600', color: 'var(--navy)' }}>{user.phone || '—'}</td>
+                              </td>
+                              <td data-label="Email" style={{ fontWeight: '500' }}>{user.email}</td>
+                              <td data-label="Phone Number" style={{ fontWeight: '600', color: 'var(--navy)' }}>{displayPhone || '—'}</td>
                             <td data-label="Registered" style={{ color: 'var(--text-dim)' }}>
                               {new Date(user.createdAt).toLocaleDateString('en-IN', {
                                 day: '2-digit',
@@ -874,7 +873,8 @@ export default function Dashboard() {
                               </button>
                             </td>
                           </tr>
-                        ))}
+                        );
+                      })}
                       </tbody>
                     </table>
                   )}
