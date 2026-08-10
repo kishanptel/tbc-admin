@@ -15,6 +15,7 @@ export default function Login() {
 
   // Authenticate Admin session
   useEffect(() => {
+    document.title = 'theblissco | admin';
     const admin = localStorage.getItem('theblissco_admin') || sessionStorage.getItem('theblissco_admin');
     if (admin) {
       navigate('/dashboard');

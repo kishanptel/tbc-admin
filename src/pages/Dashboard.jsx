@@ -93,6 +93,7 @@ export default function Dashboard() {
 
   // Authenticate Admin
   useEffect(() => {
+    document.title = 'theblissco | admin';
     const savedAdmin = localStorage.getItem('theblissco_admin') || sessionStorage.getItem('theblissco_admin');
     if (!savedAdmin) {
       navigate('/login');
