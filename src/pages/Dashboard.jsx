@@ -849,32 +849,32 @@ export default function Dashboard() {
                               </td>
                               <td data-label="Email" style={{ fontWeight: '500' }}>{user.email}</td>
                               <td data-label="Phone Number" style={{ fontWeight: '600', color: 'var(--navy)' }}>{displayPhone || '—'}</td>
-                            <td data-label="Registered" style={{ color: 'var(--text-dim)' }}>
-                              {new Date(user.createdAt).toLocaleDateString('en-IN', {
-                                day: '2-digit',
-                                month: 'short',
-                                year: 'numeric'
-                              })}
-                            </td>
-                            <td data-label="Status" style={{ textAlign: 'center' }}>
-                              <span className="status-badge completed" style={{ background: 'rgba(22, 163, 74, 0.08)', color: 'var(--success)', display: 'inline-flex', alignItems: 'center' }}>
-                                <UserCheck size={12} style={{ marginRight: '4px' }} />
-                                <span>Active</span>
-                              </span>
-                            </td>
-                            <td data-label="Actions" style={{ textAlign: 'center' }}>
-                              <button 
-                                onClick={() => setUserToDelete(user._id)} 
-                                className="btn btn-secondary btn-sm" 
-                                style={{ display: 'inline-flex', padding: '6px 12px', width: 'auto', alignItems: 'center', gap: '6px' }}
-                              >
-                                <Trash2 size={13} style={{ verticalAlign: 'middle' }} />
-                                <span>Remove</span>
-                              </button>
-                            </td>
-                          </tr>
-                        );
-                      })}
+                              <td data-label="Registered" style={{ color: 'var(--text-dim)' }}>
+                                {new Date(user.createdAt).toLocaleDateString('en-IN', {
+                                  day: '2-digit',
+                                  month: 'short',
+                                  year: 'numeric'
+                                })}
+                              </td>
+                              <td data-label="Status" style={{ textAlign: 'center' }}>
+                                <span className="status-badge completed" style={{ background: 'rgba(22, 163, 74, 0.08)', color: 'var(--success)', display: 'inline-flex', alignItems: 'center' }}>
+                                  <UserCheck size={12} style={{ marginRight: '4px' }} />
+                                  <span>Active</span>
+                                </span>
+                              </td>
+                              <td data-label="Actions" style={{ textAlign: 'center' }}>
+                                <button 
+                                  onClick={() => setUserToDelete(user._id)} 
+                                  className="btn btn-secondary btn-sm" 
+                                  style={{ display: 'inline-flex', padding: '6px 12px', width: 'auto', alignItems: 'center', gap: '6px' }}
+                                >
+                                  <Trash2 size={13} style={{ verticalAlign: 'middle' }} />
+                                  <span>Remove</span>
+                                </button>
+                              </td>
+                            </tr>
+                          );
+                        })}
                       </tbody>
                     </table>
                   )}
