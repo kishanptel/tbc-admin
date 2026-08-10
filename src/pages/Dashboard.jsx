@@ -381,8 +381,8 @@ export default function Dashboard() {
       {/* Sidebar Nav */}
       <aside className="sidebar">
         <div className="sidebar-header">
-          <img src={adminLogoPic} alt="TheBlissCo Logo" className="sidebar-logo" />
-          <h2 className="sidebar-title">TheBlissCo</h2>
+          <img src={adminLogoPic} alt="theblissco Logo" className="sidebar-logo" />
+          <h2 className="sidebar-title">theblissco</h2>
         </div>
 
         <nav className="sidebar-nav">
@@ -437,7 +437,7 @@ export default function Dashboard() {
                 className="admin-avatar" 
                 onError={(e) => { e.target.onerror = null; e.target.src = adminLogoPic; }}
               />
-              <span className="admin-name">{admin.name?.split(' ')[0]}</span>
+              <span className="admin-name">{admin.name || 'theblissco'}</span>
             </div>
           )}
           <button onClick={handleLogout} className="logout-btn" title="Logout">
@@ -482,7 +482,7 @@ export default function Dashboard() {
                   />
                 </div>
                 <span className="user-display-name" style={{ fontSize: '0.88rem', fontWeight: '800', color: 'var(--navy)' }}>
-                  {admin.name?.split(' ')[0]}
+                  {admin.name || 'theblissco'}
                 </span>
               </div>
             )}
@@ -976,7 +976,7 @@ export default function Dashboard() {
                             type="text" 
                             className="form-input" 
                             style={{ paddingLeft: '16px' }}
-                            placeholder="e.g. Shruti Patel"
+                            placeholder="Name"
                             value={newAdminName} 
                             onChange={(e) => setNewAdminName(e.target.value)} 
                             required 
